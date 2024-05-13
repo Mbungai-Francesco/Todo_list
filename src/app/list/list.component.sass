@@ -1,0 +1,57 @@
+@use '../../styles' as base
+
+%cards
+  width: 100%
+  display: flex
+  background-color: base.$Very_Dark_Desaturated_Blue
+  border-radius: 5px
+  padding-inline: 1.5em
+  padding-block: 1.3em
+
+%checks
+  background: base.$Check_Background
+  background-color: unset !important 
+
+%unChecks
+  border: 1px base.$Light_Grayish_Blue solid
+  background-color: transparent 
+  background: unset !important
+  svg 
+    display: none
+
+@mixin row($col, $pcol)
+  background-color: transparent
+  border: 0
+  width: 90%
+  font-size: 1.1em
+  color: $col
+  &::placeholder
+    color: $pcol
+
+.unCheck
+  @extend %unChecks
+.check
+  @extend %checks
+
+.card
+  @extend %cards
+  #checkBtn
+    width: 1.5em
+    aspect-ratio: 1/1
+    margin-inline: 0 1em
+    border-radius: 50%
+    display: flex
+    align-items: center
+    justify-content: center
+  input[type = input]
+    @include row(base.$Very_Light_Gray, base.$Very_Dark_Grayish_Blue)
+    font-weight: 400
+  p
+    align-self: center
+    font-size: 1.1em
+    color: base.$Light_Grayish_Blue
+  &:has(.check)
+    p
+      text-decoration: line-through
+      color: base.$Very_Dark_Grayish_Blue
+    

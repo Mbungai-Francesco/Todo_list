@@ -1,0 +1,43 @@
+@use '../../styles' as base
+@use '../list/list.component' as list
+
+%text-hover
+  p
+    &:hover
+      color: base.$Bright_Blue
+      cursor: pointer
+
+ul
+  list-style: none
+
+main
+  width: 50%
+  margin: auto
+  // background-color: pink
+  position: relative
+  z-index: 2
+  .top
+    display: flex
+    justify-content: space-between
+    padding-block: 6em 3em
+  #bottom
+    background-color: base.$Very_Dark_Desaturated_Blue
+    border-radius: 5px
+    margin-block: 2em 0
+    // padding-left: .7em
+    li
+      border-bottom: 1px solid base.$Very_Dark_Grayish_Blue
+    footer
+      display: flex
+      justify-content: space-between
+      padding-inline: 1.5em
+      padding-block: 1em
+      color: base.$Very_Dark_Grayish_Blue
+      font-weight: 600
+      @extend %text-hover
+      #status
+        display: flex
+        p
+          margin-inline: 0 1em
+          font-size: 1.1em
+    

@@ -1,0 +1,14 @@
+<div class="card">
+  @if (data.checked) {
+    <div [class]="check" (click)="checker()" id="checkBtn">
+      <svg xmlns="http://www.w3.org/2000/svg" width="11" height="9"><path fill="none" stroke="#FFF" stroke-width="2" d="M1 4.304L3.696 7l6-6"/></svg>
+    </div>
+  }
+  @else {
+    <div [class]="unCheck" (click)="checker()" id="checkBtn">
+      <svg xmlns="http://www.w3.org/2000/svg" width="11" height="9"><path fill="none" stroke="#FFF" stroke-width="2" d="M1 4.304L3.696 7l6-6"/></svg>
+    </div>
+  }
+  <p [hidden]="view">{{data.value}}</p>
+  <input [type]="inType" name="todo" placeholder="Create a new todo..." class="input">
+</div>
