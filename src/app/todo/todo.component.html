@@ -7,7 +7,16 @@
   <div id="bottom">
     <ul>
       @for (item of todos; track $index) {
-        <li><app-list [inType] = "type2" [view]="pv2" [todo]="todos[$index].text" (status)="status($event)"></app-list></li>
+        @if(stats){
+          @if(item.checked){
+            <li><app-list [inType] = "type2" [view]="pv2" [todo]="[$index,todos[$index].text]" (status)="status($event)"></app-list></li>
+          }
+        }
+        @else {
+          @if(!item.checked){
+            <li><app-list [inType] = "type2" [view]="pv2" [todo]="[$index,todos[$index].text]" (status)="status($event)"></app-list></li>
+          }
+        }
       }
       <!-- <li><app-list [inType] = "type2" [view]="pv2"></app-list></li> -->
     </ul>
@@ -16,9 +25,9 @@
         <p>{{items}} items left</p>
       </div>
       <div id="status">
-        <p class="active" >All</p>
-        <p>Active</p>
-        <p>Completed</p>
+        <p class="active" (click)="stat()">All</p>
+        <p (click)="stat(false)">Active</p>
+        <p (click)="stat(true)">Completed</p>
       </div>
       <div id="clear">
         <p>Clear All</p>

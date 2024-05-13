@@ -22,6 +22,7 @@ export class TodoComponent {
 
   todos: TodoLi[] = []
   items: number = 0
+  stats: boolean = false
 
   addToList(val: TodoLi){
     if(typeof val != null){
@@ -47,6 +48,11 @@ export class TodoComponent {
     }else{
       this.items++
     }
+  }
+
+  stat(...args: any){
+    console.log(args[0])
+    this.stats = args[0]
   }
 
   constructor() {
