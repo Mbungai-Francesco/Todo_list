@@ -1,6 +1,4 @@
-import { Component, Input } from '@angular/core';
-import { listenerCount } from 'stream';
-
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 @Component({
   selector: 'app-list',
   standalone: true,
@@ -11,6 +9,9 @@ import { listenerCount } from 'stream';
 export class ListComponent {
   @Input({required: true}) inType? : string
   @Input({required: true}) view? : boolean
+  @Input({required: true}) todo?: string | undefined | null
+  @Output() status = new EventEmitter<boolean>();
+  
   data= {
     value: "What I have to do",
     checked: false
@@ -21,6 +22,7 @@ export class ListComponent {
   checker(){
     if (this.data.checked) this.data.checked = false
     else this.data.checked = true
+    this.status.emit(this.data.checked)
   }
 
 }

@@ -1,0 +1,6 @@
+<form class="card" [formGroup]="todoInput" (ngSubmit)= "createTodo()" name="todoInput">
+  <div class="unCheck" id="checkBtn">
+    <svg xmlns="http://www.w3.org/2000/svg" width="11" height="9"><path fill="none" stroke="#FFF" stroke-width="2" d="M1 4.304L3.696 7l6-6"/></svg>
+  </div>
+  <input type="text" name="todo" placeholder="Create a new todo..." class="input" formControlName="val" [value]="vals">
+</form>

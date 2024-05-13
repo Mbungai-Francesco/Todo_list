@@ -1,0 +1,16 @@
+@use '../list/list.component' as list
+@use '../../styles' as base
+
+.card
+  @include list.cards()
+  #checkBtn
+    width: 1.5em
+    aspect-ratio: 1/1
+    margin-inline: 0 1em
+    border-radius: 50%
+    display: flex
+    align-items: center
+    justify-content: center
+  input[type = text]
+    @include list.row(base.$Very_Light_Gray, base.$Very_Dark_Grayish_Blue)
+    font-weight: 400
