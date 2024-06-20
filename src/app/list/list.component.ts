@@ -13,27 +13,21 @@ export class ListComponent {
     id: number,
     text: string | null | undefined,
   ]
-  returnVal? : {
-    id?:number,
-    val:boolean,
-  }
-  @Output() status = new EventEmitter<[id:number,val:boolean]>();
+  // returnVal? : {
+  //   id?:number,
+  //   val:boolean,
+  // }
+  @Output() status = new EventEmitter<boolean>();
   
-  data= {
-    value: "What I have to do",
-    checked: false
-  }
+  @Input({required: true}) checked : boolean = false
+
   check: string = 'check'
   unCheck: string = 'unCheck'
 
   checker(){
-    if (this.data.checked) this.data.checked = false
-    else this.data.checked = true
-    returnVals: this.returnVal = {
-      this.todo?[0] ,
-      this.data.checked,
-    }
-    this.status.emit([this.todo?[0] , this.data.checked])
+    // if (this.data.checked) this.data.checked = false
+    // else this.data.checked = true
+    this.status.emit()
   }
 
 }

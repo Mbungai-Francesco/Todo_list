@@ -7,15 +7,18 @@
   <div id="bottom">
     <ul>
       @for (item of todos; track $index) {
-        @if(stats){
+        @if(stats == true){
           @if(item.checked){
-            <li><app-list [inType] = "type2" [view]="pv2" [todo]="[$index,todos[$index].text]" (status)="status($event)"></app-list></li>
+            <li><app-list [inType] = "type2" [view]="pv2" [todo]="[item.id,item.text]" (status)="status(item.checked, $index)" [checked]="item.checked"></app-list></li>
           }
         }
-        @else {
+        @else if(stats == false) {
           @if(!item.checked){
-            <li><app-list [inType] = "type2" [view]="pv2" [todo]="[$index,todos[$index].text]" (status)="status($event)"></app-list></li>
+            <li><app-list [inType] = "type2" [view]="pv2" [todo]="[item.id,item.text]" (status)="status(item.checked, $index)" [checked]="item.checked"></app-list></li>
           }
+        }
+        @else{
+          <li><app-list [inType] = "type2" [view]="pv2" [todo]="[item.id,item.text]" (status)="status(item.checked, $index)" [checked]="item.checked"></app-list></li>
         }
       }
       <!-- <li><app-list [inType] = "type2" [view]="pv2"></app-list></li> -->
@@ -25,15 +28,19 @@
         <p>{{items}} items left</p>
       </div>
       <div id="status">
-        <p class="active" (click)="stat()">All</p>
-        <p (click)="stat(false)">Active</p>
-        <p (click)="stat(true)">Completed</p>
+        <p class="active" (click)="stat()" #states>All</p>
+        <p class="" (click)="stat(false,1)" #states>Active</p>
+        <p class="" (click)="stat(true,2)" #states>Completed</p>
       </div>
       <div id="clear">
-        <p>Clear All</p>
+        <p (click)="clearAll()">Clear All</p>
       </div>
     </footer>
   </div>
 </main>
+<script>
+  status = document.getElementById('status').children
+  console.log(status);
+</script>
 
 

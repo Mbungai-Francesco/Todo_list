@@ -12,5 +12,5 @@ let ins = document.querySelector('.input')
 body?.addEventListener('keyup', function (){
   TodoInputComponent.prototype.createTodo()
   // TodoComponent.prototype.status()
-  if( ins != null) ins.innerHTML = ''
+  // if( ins != null) ins.innerHTML = ''
 })

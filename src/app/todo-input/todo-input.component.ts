@@ -12,13 +12,13 @@ import { log } from 'console';
 })
 export class TodoInputComponent {
 
-  vals? : string | undefined | null = ""
-
   todoInput = new FormGroup({
     val : new FormControl(''),
   })
 
+  // event emitter
   @Output() addTodo = new EventEmitter<TodoLi>();
+
   createTodo() {
     // console.log(this.todoInput.value.val);
     if (typeof this.todoInput.value.val != null && typeof this.todoInput.value.val != "undefined" && this.todoInput.value.val != "") {   
@@ -28,6 +28,7 @@ export class TodoInputComponent {
         checked: false
       })
     }
+    this.todoInput.reset()
   }
 
 }
