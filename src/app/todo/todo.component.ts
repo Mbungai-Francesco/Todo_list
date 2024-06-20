@@ -1,4 +1,12 @@
-import { Component, ElementRef, QueryList, Renderer2, ViewChild, ViewChildren, inject } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  QueryList,
+  Renderer2,
+  ViewChild,
+  ViewChildren,
+  inject,
+} from '@angular/core';
 import { ListComponent } from '../list/list.component';
 import { TodoLi } from '../data';
 import { TodoInputComponent } from '../todo-input/todo-input.component';
@@ -14,17 +22,17 @@ import { log } from 'node:console';
 })
 export class TodoComponent {
   // todoService = inject(TodoService);
-  @ViewChildren('states') state! : QueryList<ElementRef>;
-  constructor(private renderer: Renderer2){}
+  @ViewChildren('states') state!: QueryList<ElementRef>;
+  constructor(private renderer: Renderer2) {}
 
   type1: string = 'input';
   pv: boolean = true;
   type2: string = 'hidden';
   pv2: boolean = false;
-  
+
   todos: TodoLi[] = [];
   completed: TodoLi[] = [];
-  items!: number
+  items!: number;
   stats: boolean | null = null;
   // TodoComponent: any;
 
@@ -33,7 +41,7 @@ export class TodoComponent {
   }
 
   loadTodos() {
-    if(!localStorage.getItem('todos')){
+    if (!localStorage.getItem('todos')) {
       localStorage.setItem('todos', JSON.stringify([]));
     }
     const todosStr = localStorage.getItem('todos');
@@ -49,7 +57,7 @@ export class TodoComponent {
       this.todos.push(val);
       console.log(this.todos);
       this.items++;
-      localStorage.setItem('todos', JSON.stringify(this.todos))
+      localStorage.setItem('todos', JSON.stringify(this.todos));
     }
   }
 
@@ -64,14 +72,17 @@ export class TodoComponent {
 
   status(val: boolean, id: number) {
     // this.items = 0
+    let touched: boolean = this.state.get(0)?.nativeElement.classList.contains('active');
     if (val) {
       this.todos[id].checked = false;
-      this.items = this.countFunc(true);
     } else {
       this.todos[id].checked = true;
-      this.items = this.countFunc(false);
     }
-    localStorage.setItem('todos', JSON.stringify(this.todos))
+    if(!touched){
+      if(this.todos[id].checked) this.items = this.countFunc(false);
+      else this.items = this.countFunc(true);
+    }
+    localStorage.setItem('todos', JSON.stringify(this.todos));
   }
 
   countFunc(val: boolean): number {
@@ -85,13 +96,15 @@ export class TodoComponent {
     console.log(i);
     if (val) return i;
     else return this.todos.length - i;
-  };
+  }
 
   stat(...args: any) {
     console.log(this.todos);
     console.log(this.state);
-    this.state.forEach(child => this.renderer.removeClass(child?.nativeElement, 'active'))
-    console.log(this.state.get(0))
+    this.state.forEach((child) =>
+      this.renderer.removeClass(child?.nativeElement, 'active')
+    );
+    console.log(this.state.get(0));
     if (typeof args[0] == 'undefined') {
       this.stats = null;
       this.items = this.todos.length;
@@ -101,7 +114,6 @@ export class TodoComponent {
       this.items = this.countFunc(args[0]);
       this.renderer.addClass(this.state.get(args[1])?.nativeElement, 'active');
     }
-    
   }
 
   clearAll() {
@@ -109,7 +121,7 @@ export class TodoComponent {
     this.items = 0;
     this.todos = [];
     // console.log(this.todos);
-    localStorage.setItem('todos', JSON.stringify(this.todos))
+    localStorage.setItem('todos', JSON.stringify(this.todos));
   }
 
   // constructor() {
